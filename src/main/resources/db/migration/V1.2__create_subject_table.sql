@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS subject(
+id_subject SERIAL PRIMARY KEY,
+name VARCHAR,
+is_active BOOLEAN
+);
