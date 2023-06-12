@@ -11,7 +11,7 @@ public class RatingService {
     @Autowired
     RatingRepository ratingRepository;
 
-    public RatingEntity createRatingByStudent(RatingEntity body) {
-        return ratingRepository.save(body);
+    public RatingEntity createRating(RatingEntity rating) {
+        return ratingRepository.save(rating);
     }
 }

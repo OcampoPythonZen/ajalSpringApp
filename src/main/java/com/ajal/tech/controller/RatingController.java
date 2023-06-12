@@ -16,8 +16,8 @@ public class RatingController {
     private RatingService ratingService;
 
     @PostMapping
-    public RatingEntity createRating(@RequestBody RatingEntity body){
-        return ratingService.createRatingByStudent(body);
+    public RatingEntity createRating(@RequestBody RatingEntity rating) {
+        return ratingService.createRating(rating);
     }
 
 }

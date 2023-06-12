@@ -1,5 +1,9 @@
 package com.ajal.tech.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "student")
@@ -16,24 +19,31 @@ public class StudentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_student")
+    @JsonProperty("id_student")
     private Long idStudent;
 
     private String names;
 
     @Column(name = "last_name")
+    @JsonProperty("last_name")
     private String lastName;
 
     @Column(name = "second_last_name")
+    @JsonProperty("second_last_name")
     private String secondLastName;
 
     @Column(name = "is_active")
+    @JsonProperty("is_active")
     private Boolean isActive = true;
 
     @Column(name = "created_at")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @JsonProperty("created_at")
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date createdAt = Date.valueOf(LocalDate.now());
 
     @Column(name = "updated_at")
+    @JsonProperty("updated_at")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime updatedAt = null;
 
     private Boolean deleted = false;
@@ -41,7 +51,7 @@ public class StudentEntity {
     public StudentEntity() {
     }
 
-    public StudentEntity(Long idStudent, String names, String lastName, String secondLastName, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt, Boolean deleted) {
+    public StudentEntity(Long idStudent, String names, String lastName, String secondLastName, Boolean isActive, Date createdAt, LocalDateTime updatedAt, Boolean deleted) {
         this.idStudent = idStudent;
         this.names = names;
         this.lastName = lastName;
@@ -93,11 +103,11 @@ public class StudentEntity {
         isActive = active;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 

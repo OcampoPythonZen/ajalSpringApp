@@ -1,6 +1,8 @@
 
 package com.ajal.tech.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,8 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.springframework.format.annotation.DateTimeFormat;
-
 
 @Entity
 @Table(name = "rating")
@@ -21,23 +21,29 @@ public class RatingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_rating")
+    @JsonProperty("id_rating")
     private Long idRating;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id", referencedColumnName = "id_student", nullable = false, unique = true)
+    @JsonProperty("student_id")
     private StudentEntity studentId;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id", referencedColumnName = "id_subject", nullable = false, unique = true)
+    @JsonProperty("subject_id")
     private SubjectEntity subjectId;
 
     private Float rate;
 
     @Column(name = "created_at")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @JsonProperty("created_at")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "updated_at")
+    @JsonProperty("updated_at")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime updatedAt = null;
 
     private Boolean deleted = false;

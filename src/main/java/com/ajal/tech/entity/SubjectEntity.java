@@ -1,5 +1,9 @@
 package com.ajal.tech.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "subject")
@@ -16,18 +19,23 @@ public class SubjectEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_subject")
+    @JsonProperty("id_subject")
     private Long idSubject;
 
     private String name;
 
     @Column(name = "is_active")
+    @JsonProperty("is_active")
     private Boolean isActive = true;
 
     @Column(name = "created_at")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @JsonProperty("created_at")
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date createdAt = Date.valueOf(LocalDate.now());
 
     @Column(name = "updated_at")
+    @JsonProperty("updated_at")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime updatedAt = null;
 
     private Boolean deleted = false;
@@ -35,7 +43,7 @@ public class SubjectEntity {
     public SubjectEntity() {
     }
 
-    public SubjectEntity(Long idSubject, String name, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt, Boolean deleted) {
+    public SubjectEntity(Long idSubject, String name, Boolean isActive, Date createdAt, LocalDateTime updatedAt, Boolean deleted) {
         this.idSubject = idSubject;
         this.name = name;
         this.isActive = isActive;
@@ -68,11 +76,11 @@ public class SubjectEntity {
         isActive = active;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
